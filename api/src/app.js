@@ -8,7 +8,6 @@ import bodyParser from 'body-parser';
 
 import * as pathUtils from './common/path-utils';
 
-// import mongodb from './db/mongo';
 
 const app = express();
 
@@ -16,7 +15,7 @@ configureEnvironmentVariables();
 configureCORS();
 configureParsers();
 setRoutes();
-// connectBD();
+initDB();
 
 function configureEnvironmentVariables() {
   const envConfig = dotenv.parse(fs.readFileSync(path.join(__dirname, '../env', `.env.${process.env.NODE_ENV}`)));
@@ -58,8 +57,8 @@ function setRoutes() {
   });
 }
 
-// function connectBD() {
-//   mongodb(configs.db);
-// }
+function initDB() {
+  require('./db');
+}
 
 export default app;
