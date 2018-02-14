@@ -8,7 +8,6 @@ import bodyParser from 'body-parser';
 
 import * as pathUtils from './common/path-utils';
 
-// import mongodb from './db/mongo';
 
 const app = express();
 
@@ -16,21 +15,16 @@ configureEnvironmentVariables();
 configureCORS();
 configureParsers();
 setRoutes();
-// connectBD();
+initDB();
 
-// TODO refatorar foreach
 function configureEnvironmentVariables() {
-  const file = path.join(__dirname, '../env', `.env.${process.env.NODE_ENV}`);
+  const envConfig = dotenv.parse(fs.readFileSync(path.join(__dirname, '../env', `.env.${process.env.NODE_ENV}`)));
 
-  const envConfig = dotenv.parse(fs.readFileSync(file));
-  const addKey = () => {
-    Object.keys(envConfig).forEach((key) => {
-      if (key) {
-        process.env[key] = envConfig[key];
-      }
-    });
-  };
-  addKey();
+  Object.keys(envConfig).forEach((key) => {
+    if (key) {
+      process.env[key] = envConfig[key];
+    }
+  });
 }
 
 function configureCORS() {
@@ -59,12 +53,12 @@ function setRoutes() {
   });
 
   pathUtils.getGlobbedPaths(path.join(__dirname, './modules/**/routes.js')).forEach((routePath) => {
-    require(path.resolve(routePath))(app);
+    app.use(process.env.API_BASE_PATH, require(path.resolve(routePath)).default());
   });
 }
 
-// function connectBD() {
-//   mongodb(configs.db);
-// }
+function initDB() {
+  require('./db');
+}
 
 export default app;
