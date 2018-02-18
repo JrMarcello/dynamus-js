@@ -5,13 +5,15 @@ import * as model from './model';
 * @param {Object} response - HTTP response
 * @returns {Object} HTTP response with status code and data
 */
-export const getAll = (request, response) => {
+export const getAll = async (request, response) => {
   // logInfo('[BOX] - [/GET] HTTP Request :: getAll method');
 
   try {
-    response.json({ data: {} });
-  } catch (e) {
-    response.status(500).json({ error: {} });
+    // console.log(await model.getAll(request.params));
+    response.json(await model.getAll(request.params));
+  } catch (error) {
+    // Printar erro no log e/ou console
+    response.status(500).json(error);
   }
 };
 
@@ -20,13 +22,14 @@ export const getAll = (request, response) => {
 * @param {Object} response - HTTP response
 * @returns {Object} HTTP response with status code and data
 */
-export const getOne = (request, response) => {
+export const getOne = async (request, response) => {
   // logInfo('[BOX] - [/GET] HTTP Request :: getOne method');
 
   try {
-    response.json({ data: {} });
-  } catch (e) {
-    response.status(500).json({ error: {} });
+    response.json(await model.getOne(request.params.id));
+  } catch (error) {
+    // Printar erro no log e/ou console
+    response.status(500).json(error);
   }
 };
 
@@ -35,13 +38,14 @@ export const getOne = (request, response) => {
  * @param {Object} response - HTTP response
  * @returns {Object} HTTP response with status code and data
  */
-export const create = (request, response) => {
+export const create = async (request, response) => {
   // logInfo('[BOX] - [/POST] HTTP Request :: create method');
 
   try {
-    response.json({ data: {} });
-  } catch (e) {
-    response.status(500).json({ error: {} });
+    response.json(await model.create(request.body));
+  } catch (error) {
+    // Printar erro no log e/ou console
+    response.status(500).json(error);
   }
 };
 
@@ -50,13 +54,15 @@ export const create = (request, response) => {
 * @param {Object} response - HTTP response
 * @returns {Object} HTTP response with status code and data
 */
-export const update = (request, response) => {
+export const update = async (request, response) => {
   // logInfo('[BOX] - [/PUT] HTTP Request :: update method');
 
   try {
-    response.json({ data: {} });
-  } catch (e) {
-    response.status(500).json({ error: {} });
+    request.body.id = request.params.id
+    response.json(await model.update(request.body));
+  } catch (error) {
+    // Printar erro no log e/ou console
+    response.status(500).json(error);
   }
 };
 
@@ -69,8 +75,9 @@ export const remove = async (request, response) => {
   // logInfo('[BOX] - [/DELETE] HTTP Request :: remove method');
 
   try {
-    response.json({ data: {} });
-  } catch (e) {
-    response.status(500).json({ error: {} });
+    response.json(await model.remove(request.params.id));
+  } catch (error) {
+    // Printar erro no log e/ou console
+    response.status(500).json(error);
   }
 };
