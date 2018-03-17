@@ -7,29 +7,32 @@ const MemberSchema = new Schema({
     type: String,
     max: 150,
     required: [true, 'Nome é um campo obrigatório!'],
-    index: true
+    index: true,
   },
   cpf: {
     type: String,
     unique: true,
-    index: true
+    index: true,
   },
   mail: String,
-  date_birth: Date,
+  date_birth: {
+    type: Date,
+    max: Date.now,
+  },
   marital_status: {
     type: String,
-    enum: ['Solteiro', 'Casado', 'Viúvo']
+    enum: ['Solteiro', 'Casado', 'Viúvo', 'Amasiado'],
   },
-  profissao: String,
-  pai: {
+  profession: String,
+  father: {
     type: String,
     max: 150,
   },
-  mae: {
+  mother: {
     type: String,
     max: 150,
   },
-  conjuge: {
+  spouse: {
     type: String,
     max: 150,
   },
@@ -40,14 +43,17 @@ const MemberSchema = new Schema({
     state: String,
     postal: String
   },
-  // phones: [],
-  // local_batismo: {},
-  // data_batismo: {},
-  // congregacao: {},
-  // integracao: {
-  //   modo: {},
-  //   data: {},
-  // },
+  phones: [String],
+  baptism: {
+    place: String,
+    date: Date,
+  },
+  date_baptism: Date,
+  congregation: String,
+  integration: {
+    mode: String,
+    date: Date,
+  },
   created_at: {
     type: Date,
     default: Date.now,
