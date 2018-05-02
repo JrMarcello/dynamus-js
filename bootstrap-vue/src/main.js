@@ -4,10 +4,13 @@ import Vue from 'vue';
 import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
+// import 'vue-awesome/icons';
 
+// import Icon from 'vue-awesome/components/Icon';
 import App from './App';
 import router from './router';
 
+// Vue.component('icon', Icon)
 Vue.use(BootstrapVue);
 Vue.config.productionTip = false;
 

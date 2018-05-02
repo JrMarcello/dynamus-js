@@ -48,7 +48,6 @@ const MemberSchema = new Schema({
     place: String,
     date: Date,
   },
-  date_baptism: Date,
   congregation: String,
   integration: {
     mode: String,
@@ -57,15 +56,15 @@ const MemberSchema = new Schema({
   created_at: {
     type: Date,
     default: Date.now,
-    select: false
+    select: false,
   },
   updated_at: {
     type: Date,
-    select: false
+    select: false,
   },
   active: {
     type: Boolean,
-    default: true
+    default: true,
   }
 });
 
