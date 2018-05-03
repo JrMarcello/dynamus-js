@@ -8,46 +8,38 @@
         <b-col>
           <b-card>
             <b-form @submit="save" @reset="reset">
-              <b-form-group id="group-name"
-                            label="Nome:"
-                            label-for="input-name">
+              <b-form-group id="group-name" label="Nome:" label-for="input-name">
                 <b-form-input id="input-name"
                               type="text"
-                              v-model.trim="form.name"
+                              v-model.trim="member.name"
                               required
                               placeholder="">
                 </b-form-input>
               </b-form-group>
-              <b-form-group id="group-street"
-                            label="Endereço:"
-                            label-for="input-street">
+              <b-form-group id="group-street" label="Endereço:" label-for="input-street">
                 <b-form-input id="input-street"
                               type="text"
-                              v-model.trim="form.address.street"
+                              v-model.trim="member.address.street"
                               required
                               placeholder="">
                 </b-form-input>
               </b-form-group>
               <b-row>
                 <b-col>
-                  <b-form-group id="group-neighborhood"
-                                label="Bairro:"
-                                label-for="input-neighborhood">
+                  <b-form-group id="group-neighborhood" label="Bairro:" label-for="input-neighborhood">
                     <b-form-input id="input-neighborhood"
                                   type="text"
-                                  v-model.trim="form.address.neighborhood"
+                                  v-model.trim="member.address.neighborhood"
                                   required
                                   placeholder="">
                     </b-form-input>
                   </b-form-group>
                 </b-col>
                 <b-col>
-                  <b-form-group id="group-postal"
-                                label="CEP:"
-                                label-for="input-postal">
+                  <b-form-group id="group-postal" label="CEP:" label-for="input-postal">
                     <b-form-input id="input-postal"
                                   type="text"
-                                  v-model.trim="form.address.postal"
+                                  v-model.trim="member.address.postal"
                                   placeholder="">
                     </b-form-input>
                   </b-form-group>
@@ -55,24 +47,20 @@
               </b-row>
               <b-row>
                 <b-col>
-                  <b-form-group id="group-city"
-                                label="Cidade:"
-                                label-for="input-city">
+                  <b-form-group id="group-city" label="Cidade:" label-for="input-city">
                     <b-form-input id="input-city"
                                   type="text"
-                                  v-model.trim="form.address.city"
+                                  v-model.trim="member.address.city"
                                   required
                                   placeholder="">
                     </b-form-input>
                   </b-form-group>
                 </b-col>
                 <b-col>
-                  <b-form-group id="group-state"
-                                label="Estado:"
-                                label-for="input-state">
+                  <b-form-group id="group-state" label="Estado:" label-for="input-state">
                     <b-form-input id="input-state"
                                   type="text"
-                                  v-model.trim="form.address.state"
+                                  v-model.trim="member.address.state"
                                   required
                                   placeholder="">
                     </b-form-input>
@@ -81,23 +69,19 @@
               </b-row>
               <b-row>
                 <b-col>
-                  <b-form-group id="group-phone"
-                                label="Telefone (Fixo):"
-                                label-for="input-phones">
+                  <b-form-group id="group-phone" label="Telefone (Fixo):" label-for="input-phones">
                     <b-form-input id="input-phones"
                                   type="text"
-                                  v-model.trim="form.phones[0]"
+                                  v-model.trim="member.phones[0]"
                                   placeholder="">
                     </b-form-input>
                   </b-form-group>
                 </b-col>
                 <b-col>
-                  <b-form-group id="group-cell"
-                                label="Celular:"
-                                label-for="input-cell">
+                  <b-form-group id="group-cell" label="Celular:" label-for="input-cell">
                     <b-form-input id="input-cell"
                                   type="text"
-                                  v-model.trim="form.phones[1]"
+                                  v-model.trim="member.phones[1]"
                                   required
                                   placeholder="">
                     </b-form-input>
@@ -106,23 +90,19 @@
               </b-row>
               <b-row>
                 <b-col>
-                  <b-form-group id="group-mail"
-                                label="Email:"
-                                label-for="input-mail">
+                  <b-form-group id="group-mail" label="Email:" label-for="input-mail">
                     <b-form-input id="input-mail"
                                   type="text"
-                                  v-model.trim="form.mail"
+                                  v-model.trim="member.mail"
                                   placeholder="">
                     </b-form-input>
                   </b-form-group>
                 </b-col>
                 <b-col>
-                  <b-form-group id="group-birth"
-                                label="Data Nasc.:"
-                                label-for="input-birth">
+                  <b-form-group id="group-birth" label="Data Nasc.:" label-for="input-birth">
                     <b-form-input id="input-birth"
                                   type="text"
-                                  v-model.trim="form.date_birth"
+                                  v-model.trim="member.date_birth"
                                   required
                                   placeholder="">
                     </b-form-input>
@@ -131,100 +111,99 @@
               </b-row>
               <b-row>
                 <b-col>
-                  <b-form-group id="group-profession"
-                                label="Profissão:"
-                                label-for="input-profession">
+                  <b-form-group id="group-profession" label="Profissão:" label-for="input-profession">
                     <b-form-input id="input-profession"
                                   type="text"
-                                  v-model.trim="form.profession"
+                                  v-model.trim="member.profession"
                                   placeholder="">
                     </b-form-input>
                   </b-form-group>
                 </b-col>
                 <b-col>
-                  <b-form-group id="group-matrial"
-                                label="Estado Civil:"
-                                label-for="input-matrial">
+                  <b-form-group id="group-matrial" label="Estado Civil:" label-for="input-matrial">
                     <b-form-select id="input-matrial"
-                                   v-model.trim="form.marital_status"
+                                   v-model.trim="member.marital_status"
                                    :options="matrialOptions" />
                   </b-form-group>
                 </b-col>
               </b-row>
-              <b-form-group id="group-spouse"
-                            label="Cônjuge:"
-                            label-for="input-spouse">
+              <b-form-group id="group-spouse" label="Cônjuge:" label-for="input-spouse">
                 <b-form-input id="input-spouse"
                               type="text"
-                              v-model.trim="form.spouse"
-                              :required="form.marital_status === 'Casado' || form.marital_status === 'Amasiado'"
+                              v-model.trim="member.spouse"
+                              :required="member.marital_status === 'Casado' || member.marital_status === 'Amasiado'"
                               placeholder="">
                 </b-form-input>
               </b-form-group>
-              <b-form-group id="group-father"
-                            label="Pai:"
-                            label-for="input-father">
+              <b-form-group id="group-father" label="Pai:" label-for="input-father">
                 <b-form-input id="input-father"
                               type="text"
-                              v-model.trim="form.father"
+                              v-model.trim="member.father"
                               placeholder="">
                 </b-form-input>
               </b-form-group>
-              <b-form-group id="group-mother"
-                            label="Mãe:"
-                            label-for="input-mother">
+              <b-form-group id="group-mother" label="Mãe:" label-for="input-mother">
                 <b-form-input id="input-mother"
                               type="text"
-                              v-model.trim="form.mother"
+                              v-model.trim="member.mother"
                               placeholder="">
                 </b-form-input>
               </b-form-group>
-              <b-form-group id="group-baptism-local"
-                            label="Local do Batismo:"
-                            label-for="input-baptism-local">
+              <b-form-group id="group-baptism-local" label="Local do Batismo:" label-for="input-baptism-local">
                 <b-form-input id="input-baptism-local"
                               type="text"
-                              v-model.trim="form.baptism.local"
+                              v-model.trim="member.baptism.local"
                               placeholder="">
                 </b-form-input>
               </b-form-group>
-              <b-form-group id="group-baptism-date"
-                            label="Data do Batismo:"
-                            label-for="input-baptism-date">
+              <b-form-group id="group-baptism-date" label="Data do Batismo:" label-for="input-baptism-date">
                 <b-form-input id="input-baptism-date"
                               type="text"
-                              v-model.trim="form.baptism.date"
+                              v-model.trim="member.baptism.date"
                               placeholder="">
                 </b-form-input>
               </b-form-group>
-              <b-form-group id="group-congregation"
-                            label="Congregação:"
-                            label-for="input-congregation">
+              <b-form-group id="group-congregation" label="Congregação:" label-for="input-congregation">
                 <b-form-input id="input-congregation"
                               type="text"
-                              v-model.trim="form.congregation"
+                              v-model.trim="member.congregation"
                               placeholder="">
                 </b-form-input>
               </b-form-group>
               <b-row>
                 <b-col>
-                  <b-form-group id="group-integration-mode"
-                                label="Modo de Integração:"
-                                label-for="input-integration-mode">
+                  <b-form-group id="group-integration-mode" label="Modo de Integração:" label-for="input-integration-mode">
                     <b-form-select id="input-integration-mode"
-                                   v-model="form.integration.mode"
+                                   v-model="member.integration.mode"
                                    :options="integrationModeOptions" />
                   </b-form-group>
                 </b-col>
                 <b-col>
-                  <b-form-group id="group-integration-date"
-                                label="Data da Integração:"
-                                label-for="input-integration-date">
+                  <b-form-group id="group-integration-date" label="Data da Integração:" label-for="input-integration-date">
                     <b-form-input id="input-integration-date"
                                   type="text"
-                                  v-model="form.integration.date"
+                                  v-model="member.integration.date"
                                   placeholder="">
                     </b-form-input>
+                  </b-form-group>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col>
+                  <b-form-group id="group-classroom" label="Sala (EB):" label-for="input-classroom">
+                    <b-form-select id="input-classroom"
+                                   :options="classRoomOptions"
+                                   placeholder="Selecione" />
+                  </b-form-group>
+                </b-col>
+                <b-col>
+                  <b-form-group id="group-class" label="Turma:" label-for="input-class">
+                    <b-form-radio-group id="input-class"
+                                        buttons
+                                        button-variant="outline-primary"
+                                        size="lg"
+                                        v-model="classID"
+                                        :options="classOptions" />
                   </b-form-group>
                 </b-col>
               </b-row>
@@ -243,7 +222,7 @@ export default {
   name: 'member-add',
   data() {
     return {
-      form: {
+      member: {
         name: null,
         cpf: null,
         mail: null,
@@ -271,6 +250,7 @@ export default {
           date: null,
         },
       },
+      classID: null,
       matrialOptions: [
         { value: null, text: 'Selecione' },
         { value: 'Solteiro', text: 'Solteiro' },
@@ -283,15 +263,54 @@ export default {
         { value: 'Batismo', text: 'Batismo' },
         { value: 'Carta de Transferência', text: 'Carta de Transferência' },
       ],
+      classRoomOptions: [
+        { value: null, text: 'Selecione' },
+        { value: null, text: 'Sala da visão' },
+        { value: null, text: 'Alicerce da fé' },
+      ],
+      classOptions: [
+        { text: 'Domingo', value: 'id1' },
+        { text: 'Terça', value: 'id2' },
+      ],
     };
   },
   computed: {},
   methods: {
     save() {
-      console.log(this.form);
+      console.log(this.member);
+      console.log(this.classID);
     },
     reset() {
+      this.member = {
+        name: null,
+        cpf: null,
+        mail: null,
+        date_birth: null,
+        marital_status: null,
+        profession: null,
+        father: null,
+        mother: null,
+        spouse: null,
+        address: {
+          street: null,
+          neighborhood: null,
+          city: null,
+          state: null,
+          postal: null,
+        },
+        phones: [],
+        baptism: {
+          place: null,
+          date: null,
+        },
+        congregation: null,
+        integration: {
+          mode: null,
+          date: null,
+        },
+      };
 
+      this.classID = null;
     },
   },
 };
