@@ -9,8 +9,8 @@ const ClassSchema = new Schema({
   },
   name: {
     type: String,
-    max: 150,
-    required: [true, 'Informe um nome com no máximo 150 caracteres'],
+    max: [150, 'Informe um nome com no máximo 150 caracteres'],
+    required: [true, 'Escolha um nome para a turma'],
     index: true,
   },
   teachers: [Schema.Types.ObjectId],

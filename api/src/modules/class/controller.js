@@ -33,6 +33,22 @@ export const getOne = async (request, response) => {
 };
 
 /**
+* @param {Object} request - HTTP request
+* @param {Object} response - HTTP response
+* @returns {Object} HTTP response with status code and data
+*/
+export const getByClassroom = async (request, response) => {
+  // logInfo('[CLASS] - [/GET] HTTP Request :: getByClassroom method');
+
+  try {
+    response.json(await model.getByClassroom(request.params.id));
+  } catch (error) {
+    // Printar erro no log e/ou console
+    response.status(500).json(error);
+  }
+};
+
+/**
  * @param {Object} request - HTTP request
  * @param {Object} response - HTTP response
  * @returns {Object} HTTP response with status code and data

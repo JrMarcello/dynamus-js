@@ -22,6 +22,12 @@ export const getAll = (params => repository.getAll(params));
 export const getOne = (id => repository.getOne(id));
 
 /**
+ * @param {Object} id - Classroom ID
+ * @returns {Function} - Returns a Promisse
+ */
+export const getByClassroom = (id => repository.getByClassroom(id));
+
+/**
  * @param {Object} data - Class data to be saved
  * @returns {Function} - Returns a Promisse
  */

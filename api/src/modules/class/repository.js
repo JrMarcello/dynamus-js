@@ -21,6 +21,16 @@ export const getOne = (id) => {
 };
 
 /**
+ * Find Classes by Classroom ID
+ *
+ * @param {Interger} id - Classroom ID
+ * @returns {Promisse} - Returns a Promisse
+ */
+export const getByClassroom = (id) => {
+  return schema.find({ classroom_id: id, active: true }).sort({ _id: -1 });
+};
+
+/**
  * Saves a Class in database
  *
  * @param {Object} data - Class data to be saved

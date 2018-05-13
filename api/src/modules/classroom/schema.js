@@ -6,7 +6,7 @@ const ClassroomSchema = new Schema({
   name: {
     type: String,
     max: 150,
-    required: [true, 'Nome é obrigatório!'],
+    required: [true, 'Escolha um nome para a sala'],
     index: true,
   },
   created_at: {

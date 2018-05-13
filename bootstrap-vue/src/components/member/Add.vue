@@ -71,7 +71,7 @@
                 <b-col>
                   <b-form-group id="group-phone" label="Telefone (Fixo):" label-for="input-phones">
                     <b-form-input id="input-phones"
-                                  type="text"
+                                  type="tel"
                                   v-model.trim="member.phones[0]"
                                   placeholder="">
                     </b-form-input>
@@ -80,7 +80,7 @@
                 <b-col>
                   <b-form-group id="group-cell" label="Celular:" label-for="input-cell">
                     <b-form-input id="input-cell"
-                                  type="text"
+                                  type="tel"
                                   v-model.trim="member.phones[1]"
                                   required
                                   placeholder="">
@@ -92,7 +92,7 @@
                 <b-col>
                   <b-form-group id="group-mail" label="Email:" label-for="input-mail">
                     <b-form-input id="input-mail"
-                                  type="text"
+                                  type="email"
                                   v-model.trim="member.mail"
                                   placeholder="">
                     </b-form-input>
@@ -101,7 +101,7 @@
                 <b-col>
                   <b-form-group id="group-birth" label="Data Nasc.:" label-for="input-birth">
                     <b-form-input id="input-birth"
-                                  type="text"
+                                  type="date"
                                   v-model.trim="member.date_birth"
                                   required
                                   placeholder="">
@@ -158,7 +158,7 @@
               </b-form-group>
               <b-form-group id="group-baptism-date" label="Data do Batismo:" label-for="input-baptism-date">
                 <b-form-input id="input-baptism-date"
-                              type="text"
+                              type="date"
                               v-model.trim="member.baptism.date"
                               placeholder="">
                 </b-form-input>
@@ -190,10 +190,15 @@
               </b-row>
               <b-row>
                 <b-col>
-                  <b-form-group id="group-classroom" label="Sala (EB):" label-for="input-classroom">
+                  <b-form-group id="group-classroom" label="Sala (EB):" label-for="input-classroom" >
                     <b-form-select id="input-classroom"
-                                   :options="classRoomOptions"
-                                   placeholder="Selecione" />
+                                   :options="classRooms"
+                                   placeholder="Selecione"
+                                   @change="getClasses">
+                      <template slot="first">
+                        <option :value="null">Selecione</option>
+                      </template>
+                    </b-form-select>
                   </b-form-group>
                 </b-col>
                 <b-col>
@@ -203,7 +208,7 @@
                                         button-variant="outline-primary"
                                         size="lg"
                                         v-model="classID"
-                                        :options="classOptions" />
+                                        :options="classes" />
                   </b-form-group>
                 </b-col>
               </b-row>
@@ -263,22 +268,56 @@ export default {
         { value: 'Batismo', text: 'Batismo' },
         { value: 'Carta de Transferência', text: 'Carta de Transferência' },
       ],
-      classRoomOptions: [
-        { value: null, text: 'Selecione' },
-        { value: null, text: 'Sala da visão' },
-        { value: null, text: 'Alicerce da fé' },
-      ],
-      classOptions: [
-        { text: 'Domingo', value: 'id1' },
-        { text: 'Terça', value: 'id2' },
-      ],
+      classRoomOptions: [],
+      classOptions: [],
+      // classOptions: [
+      //   { text: 'Domingo', value: 'id1' },
+      //   { text: 'Terça', value: 'id2' },
+      // ],
     };
   },
-  computed: {},
+  computed: {
+    classRooms() {
+      return this.classRoomOptions;
+    },
+    classes() {
+      return this.classOptions;
+    },
+  },
   methods: {
+    /* eslint no-underscore-dangle:0 */
+    getClassrooms() {
+      this.$http.get('http://localhost:8000/api/v1/classrooms').then((res) => {
+        this.classRoomOptions = res.body.map((option) => {
+          const opt = {
+            text: option.name,
+            value: option._id,
+          };
+
+          return opt;
+        });
+      }, (err) => {
+        console.log('Error', err);
+      });
+    },
+    getClasses(value) {
+      this.$http.get(`http://localhost:8000/api/v1/classes/classroom/${value}`)
+        .then((res) => {
+          this.classOptions = res.body.map((option) => {
+            const opt = {
+              text: option.name,
+              value: option._id,
+            };
+
+            return opt;
+          });
+        }, (err) => {
+          console.log('Error', err);
+        });
+    },
     save() {
-      console.log(this.member);
-      console.log(this.classID);
+      console.log('Membro', this.member);
+      console.log('Turma', this.classID);
     },
     reset() {
       this.member = {
@@ -312,6 +351,9 @@ export default {
 
       this.classID = null;
     },
+  },
+  mounted() {
+    this.getClassrooms();
   },
 };
 </script>
