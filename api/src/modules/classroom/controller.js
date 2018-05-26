@@ -6,7 +6,7 @@ import * as model from './model';
 * @returns {Object} HTTP response with status code and data
 */
 export const getAll = async (request, response) => {
-  // logInfo('[MEMBER] - [/GET] HTTP Request :: getAll method');
+  // logInfo('[CLASSROOM] - [/GET] HTTP Request :: getAll method');
 
   try {
     response.json(await model.getAll(request.params));
@@ -22,7 +22,7 @@ export const getAll = async (request, response) => {
 * @returns {Object} HTTP response with status code and data
 */
 export const getOne = async (request, response) => {
-  // logInfo('[MEMBER] - [/GET] HTTP Request :: getOne method');
+  // logInfo('[CLASSROOM] - [/GET] HTTP Request :: getOne method');
 
   try {
     response.json(await model.getOne(request.params.id));
@@ -38,7 +38,7 @@ export const getOne = async (request, response) => {
  * @returns {Object} HTTP response with status code and data
  */
 export const create = async (request, response) => {
-  // logInfo('[MEMBER] - [/POST] HTTP Request :: create method');
+  // logInfo('[CLASSROOM] - [/POST] HTTP Request :: create method');
 
   try {
     response.json(await model.create(request.body));
@@ -54,7 +54,7 @@ export const create = async (request, response) => {
 * @returns {Object} HTTP response with status code and data
 */
 export const update = async (request, response) => {
-  // logInfo('[MEMBER] - [/PUT] HTTP Request :: update method');
+  // logInfo('[CLASSROOM] - [/PUT] HTTP Request :: update method');
 
   try {
     request.body.id = request.params.id
@@ -71,7 +71,7 @@ export const update = async (request, response) => {
 * @returns {Object} HTTP response with status code and data
 */
 export const remove = async (request, response) => {
-  // logInfo('[MEMBER] - [/DELETE] HTTP Request :: remove method');
+  // logInfo('[CLASSROOM] - [/DELETE] HTTP Request :: remove method');
 
   try {
     response.json(await model.remove(request.params.id));

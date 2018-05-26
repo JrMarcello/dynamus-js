@@ -1,7 +1,7 @@
 import schema from './schema';
 
 /**
- *  Get all Member from database.
+ *  Get all Class from database.
  *
  * @param {Object} params - Params for query
  * @returns {Promisse} - Returns a Promisse
@@ -11,9 +11,9 @@ export const getAll = (params) => {
 };
 
 /**
- * Find a Member by ID
+ * Find a Class by ID
  *
- * @param {Interger} id - Member ID
+ * @param {Interger} id - Class ID
  * @returns {Promisse} - Returns a Promisse
  */
 export const getOne = (id) => {
@@ -21,9 +21,19 @@ export const getOne = (id) => {
 };
 
 /**
- * Saves a Member in database
+ * Find Classes by Classroom ID
  *
- * @param {Object} data - Member data to be saved
+ * @param {Interger} id - Classroom ID
+ * @returns {Promisse} - Returns a Promisse
+ */
+export const getByClassroom = (id) => {
+  return schema.find({ classroom_id: id, active: true }).sort({ _id: -1 });
+};
+
+/**
+ * Saves a Class in database
+ *
+ * @param {Object} data - Class data to be saved
  * @returns {Promisse} - Returns a Promisse
  */
 export const create = (data) => {
@@ -31,9 +41,9 @@ export const create = (data) => {
 };
 
 /**
- * Updates an Member, given an id
+ * Updates an Class, given an id
  *
- * @param {Object} data - Member data to be updated
+ * @param {Object} data - Class data to be updated
  * @returns {Promisse} - Returns a Promisse
  */
 export const update = (data) => {
@@ -41,9 +51,9 @@ export const update = (data) => {
 };
 
 /**
- * Remove a Member
+ * Remove a Class
  *
- * @param {Object} id - Member data to be removed
+ * @param {Object} id - Class data to be removed
  * @param {Function} callback - First param: err, in case of error; Second param: records from DB
  * @returns {Function} - Returns the callback function
  */

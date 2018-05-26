@@ -2,7 +2,7 @@ import express from 'express';
 import * as controller from './controller';
 
 const router = express.Router();
-const API_MEMBER_BASE_PAH = '/members';
+const API_MEMBER_BASE_PAH = '/classrooms';
 
 export default () => {
   router.get(API_MEMBER_BASE_PAH, controller.getAll);

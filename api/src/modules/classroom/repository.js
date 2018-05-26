@@ -1,7 +1,7 @@
 import schema from './schema';
 
 /**
- *  Get all Member from database.
+ *  Get all Classroom from database.
  *
  * @param {Object} params - Params for query
  * @returns {Promisse} - Returns a Promisse
@@ -11,9 +11,9 @@ export const getAll = (params) => {
 };
 
 /**
- * Find a Member by ID
+ * Find a Classroom by ID
  *
- * @param {Interger} id - Member ID
+ * @param {Interger} id - Classroom ID
  * @returns {Promisse} - Returns a Promisse
  */
 export const getOne = (id) => {
@@ -21,9 +21,9 @@ export const getOne = (id) => {
 };
 
 /**
- * Saves a Member in database
+ * Saves a Classroom in database
  *
- * @param {Object} data - Member data to be saved
+ * @param {Object} data - Classroom data to be saved
  * @returns {Promisse} - Returns a Promisse
  */
 export const create = (data) => {
@@ -31,9 +31,9 @@ export const create = (data) => {
 };
 
 /**
- * Updates an Member, given an id
+ * Updates an Classroom, given an id
  *
- * @param {Object} data - Member data to be updated
+ * @param {Object} data - Classroom data to be updated
  * @returns {Promisse} - Returns a Promisse
  */
 export const update = (data) => {
@@ -41,9 +41,9 @@ export const update = (data) => {
 };
 
 /**
- * Remove a Member
+ * Remove a Classroom
  *
- * @param {Object} id - Member data to be removed
+ * @param {Object} id - Classroom data to be removed
  * @param {Function} callback - First param: err, in case of error; Second param: records from DB
  * @returns {Function} - Returns the callback function
  */
