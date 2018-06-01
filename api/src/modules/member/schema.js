@@ -11,8 +11,9 @@ const MemberSchema = new Schema({
   },
   cpf: {
     type: String,
-    unique: true,
+    // unique: true,
     index: true,
+    sparse: true,
   },
   mail: String,
   date_birth: {

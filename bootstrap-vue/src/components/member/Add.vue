@@ -1,5 +1,7 @@
 <template>
   <div id="member-add">
+    <b-alert variant="success" :show="showSuccessAlert" dismissible>Cadastro realizado</b-alert>
+    <b-alert variant="danger" :show="showErrorAlert" dismissible>Erro ao tentar cadastrar Membro</b-alert>
     <b-container>
       <b-row>
         <h1>Cadastro de Membros</h1>
@@ -123,7 +125,8 @@
                   <b-form-group id="group-matrial" label="Estado Civil:" label-for="input-matrial">
                     <b-form-select id="input-matrial"
                                    v-model.trim="member.marital_status"
-                                   :options="matrialOptions" />
+                                   :options="matrialOptions"
+                                   required />
                   </b-form-group>
                 </b-col>
               </b-row>
@@ -149,20 +152,26 @@
                               placeholder="">
                 </b-form-input>
               </b-form-group>
-              <b-form-group id="group-baptism-local" label="Local do Batismo:" label-for="input-baptism-local">
-                <b-form-input id="input-baptism-local"
-                              type="text"
-                              v-model.trim="member.baptism.local"
-                              placeholder="">
-                </b-form-input>
-              </b-form-group>
-              <b-form-group id="group-baptism-date" label="Data do Batismo:" label-for="input-baptism-date">
-                <b-form-input id="input-baptism-date"
-                              type="date"
-                              v-model.trim="member.baptism.date"
-                              placeholder="">
-                </b-form-input>
-              </b-form-group>
+              <b-row>
+                <b-col>
+                  <b-form-group id="group-baptism-local" label="Local do Batismo:" label-for="input-baptism-local">
+                    <b-form-input id="input-baptism-local"
+                                  type="text"
+                                  v-model.trim="member.baptism.local"
+                                  placeholder="">
+                    </b-form-input>
+                  </b-form-group>
+                </b-col>
+                <b-col>
+                  <b-form-group id="group-baptism-date" label="Data do Batismo:" label-for="input-baptism-date">
+                    <b-form-input id="input-baptism-date"
+                                  type="date"
+                                  v-model.trim="member.baptism.date"
+                                  placeholder="">
+                    </b-form-input>
+                  </b-form-group>
+                </b-col>
+              </b-row>
               <b-form-group id="group-congregation" label="Congregação:" label-for="input-congregation">
                 <b-form-input id="input-congregation"
                               type="text"
@@ -181,7 +190,7 @@
                 <b-col>
                   <b-form-group id="group-integration-date" label="Data da Integração:" label-for="input-integration-date">
                     <b-form-input id="input-integration-date"
-                                  type="text"
+                                  type="date"
                                   v-model="member.integration.date"
                                   placeholder="">
                     </b-form-input>
@@ -202,8 +211,8 @@
                   </b-form-group>
                 </b-col>
                 <b-col>
-                  <b-form-group id="group-class" label="Turma:" label-for="input-class">
-                    <b-form-radio-group id="input-class"
+                  <b-form-group id="group-class" label="Turma:" label-for="radio-class" v-if="classes.length > 0">
+                    <b-form-radio-group id="radio-class"
                                         buttons
                                         button-variant="outline-primary"
                                         size="lg"
@@ -227,6 +236,8 @@ export default {
   name: 'member-add',
   data() {
     return {
+      showSuccessAlert: false,
+      showErrorAlert: false,
       member: {
         name: null,
         cpf: null,
@@ -270,10 +281,6 @@ export default {
       ],
       classRoomOptions: [],
       classOptions: [],
-      // classOptions: [
-      //   { text: 'Domingo', value: 'id1' },
-      //   { text: 'Terça', value: 'id2' },
-      // ],
     };
   },
   computed: {
@@ -301,8 +308,8 @@ export default {
       });
     },
     getClasses(value) {
-      this.$http.get(`http://localhost:8000/api/v1/classes/classroom/${value}`)
-        .then((res) => {
+      if (value) {
+        this.$http.get(`http://localhost:8000/api/v1/classes/classroom/${value}`).then((res) => {
           this.classOptions = res.body.map((option) => {
             const opt = {
               text: option.name,
@@ -314,12 +321,36 @@ export default {
         }, (err) => {
           console.log('Error', err);
         });
+      }
     },
     save() {
-      console.log('Membro', this.member);
-      console.log('Turma', this.classID);
+      this.$http.post('http://localhost:8000/api/v1/members', this.member).then((res) => {
+        // console.log(`http://localhost:8000/api/v1/classes/${this.classID}`);
+        console.log(res);
+        // if (this.classID && res.body._id) {
+        //   this.$http.put(`http://localhost:8000/api/v1/classes/${this.classID}`, { students: [res.body._id] })
+        //     .then(() => {
+        //       this.showErrorAlert = false;
+        //       this.showSuccessAlert = true;
+        //       this.reset();
+        //     }, (err) => {
+        //       this.showSuccessAlert = false;
+        //       this.showErrorAlert = true;
+        //       console.log('Member Error 2', err);
+        //     });
+        // } else {
+        //   this.showErrorAlert = false;
+        //   this.showSuccessAlert = true;
+        // }
+      }, (err) => {
+        this.showSuccessAlert = false;
+        this.showErrorAlert = true;
+        console.log('Member Error 1', err);
+      });
     },
     reset() {
+      this.showSuccessAlert = false;
+      this.showErrorAlert = false;
       this.member = {
         name: null,
         cpf: null,
@@ -348,7 +379,6 @@ export default {
           date: null,
         },
       };
-
       this.classID = null;
     },
   },

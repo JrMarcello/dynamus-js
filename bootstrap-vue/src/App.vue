@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    
+
     <b-navbar type="dark" variant="dark">
-      <b-navbar-brand href="#">LOGO IEB</b-navbar-brand>
+      <b-navbar-brand href="#">
+        <b-img src="src/assets/logo-white.png" fluid alt="Logo" />
+      </b-navbar-brand>
 
       <b-navbar-nav class="ml-auto">
         <b-nav-form>

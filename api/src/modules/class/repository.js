@@ -27,7 +27,7 @@ export const getOne = (id) => {
  * @returns {Promisse} - Returns a Promisse
  */
 export const getByClassroom = (id) => {
-  return schema.find({ classroom_id: id, active: true }).sort({ _id: -1 });
+  return schema.find({ classroom_id: id, active: true }).sort({ name: -1 });
 };
 
 /**
