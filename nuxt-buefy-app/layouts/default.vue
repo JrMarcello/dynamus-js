@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <!-- <div>
     <nav
       class="navbar header has-shadow is-primary"
       role="navigation"
@@ -44,6 +44,11 @@
       </div>
 
     </section>
+  </div> -->
+
+  <div>
+    <div>My blog navigation bar here</div>
+    <nuxt/>
   </div>
 </template>
 

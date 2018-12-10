@@ -15,6 +15,10 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      // {
+      //   rel: 'stylesheet',
+      //   href: 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
+      // }
     ]
   },
 
@@ -26,14 +30,12 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: [
-  ],
+  css: [],
 
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-  ],
+  plugins: [],
 
   /*
   ** Nuxt.js modules
@@ -41,6 +43,8 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
+    // Doc: https://auth.nuxtjs.org/
+    // '@nuxtjs/auth',
     // Doc: https://buefy.github.io/#/documentation
     'nuxt-buefy'
   ],
@@ -49,8 +53,27 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    baseURL: 'http://127.0.0.1:8000/api/v1'
   },
-
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: 'login', method: 'post', propertyName: 'token' },
+          user: { url: 'me', method: 'get', propertyName: 'data' },
+          logout: false
+        },
+        tokenRequired: true,
+        tokenType: 'Bearer'
+      }
+    },
+    redirect: {
+      login: '/home',
+      logout: '/',
+      user: '/me',
+      callback: '/'
+    }
+  },
   /*
   ** Build configuration
   */
@@ -70,4 +93,7 @@ module.exports = {
       }
     }
   }
+  // router: {
+  //   middleware: ['auth']
+  // }
 }

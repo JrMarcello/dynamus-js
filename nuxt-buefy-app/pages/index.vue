@@ -1,29 +1,45 @@
 <template>
-  <section class="section">
-    <div class="columns is-mobile">
-      <div
-        v-for="(feature, i) of features"
-        :key="i"
-        class="column">
-        <div class="card">
-          <header class="card-header">
-            <p class="card-header-title has-text-grey">
-              {{ feature.title }}
-            </p>
-          </header>
-          <div class="card-content">
-            <div class="content has-text-centered">
-              <b-icon
-                :icon="feature.icon"
-                size="is-large"
-                type="is-primary"/>
-            </div>
+  <section class="hero is-success is-fullheight">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <div class="column is-4 is-offset-4">
+          <h3 class="title has-text-grey">Login</h3>
+          <p class="subtitle has-text-grey">Please login to proceed.</p>
+          <div class="box">
+            <figure class="avatar">
+              <img src="https://placehold.it/128x128">
+            </figure>
+            <form>
+              <div class="field">
+                <div class="control">
+                  <input
+                    class="input is-large"
+                    type="email"
+                    placeholder="Your Email"
+                    autofocus="">
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="control">
+                  <input
+                    class="input is-large"
+                    type="password"
+                    placeholder="Your Password">
+                </div>
+              </div>
+              <div class="field">
+                <label class="checkbox">
+                <input type="checkbox">Remember me</label>
+              </div>
+              <button class="button is-block is-info is-large is-fullwidth">Login</button>
+            </form>
           </div>
-          <footer class="card-footer">
-            <div
-              class="card-footer-item"
-              v-html="feature.content"/>
-          </footer>
+          <!-- <p class="has-text-grey">
+            <a href="../">Sign Up</a> &nbsp;·&nbsp;
+            <a href="../">Forgot Password</a> &nbsp;·&nbsp;
+            <a href="../">Need Help?</a>
+          </p> -->
         </div>
       </div>
     </div>
@@ -34,17 +50,48 @@
 import BLogo from '@/components/Logo'
 
 export default {
-  name: 'HomePage',
-  components: {BLogo},
-  data() {
-      return {
-          features: [
-              { icon: 'github-circle', title: 'Free', content: `<span>Open source on <a href="https://github.com/buefy/buefy"> GitHub</a></span>` },
-              { icon: 'cellphone-link', title: 'Responsive', content: `<span><b class="has-text-grey">Every</b> component is responsive</span>` },
-              { icon: 'alert-decagram', title: 'Modern', content: `<span>Built with <a href="https://vuejs.org/">Vue.js</a> and <a href="http://bulma.io/">Bulma</a></span>` },
-              { icon: 'arrange-bring-to-front', title: 'Lightweight', content: `<span>No other internal dependency</span>` }
-          ]
-      }
-  }
+  name: 'LoginPage',
+  layout: 'login'
 }
 </script>
+
+<style>
+html,
+body {
+  font-family: 'Open Sans', serif;
+  font-size: 14px;
+  font-weight: 300;
+}
+.hero.is-success {
+  background: #f2f6fa;
+}
+.hero .nav,
+.hero.is-success .nav {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.box {
+  margin-top: 5rem;
+}
+.avatar {
+  margin-top: -70px;
+  padding-bottom: 20px;
+}
+.avatar img {
+  padding: 5px;
+  background: #fff;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1),
+    0 0 0 1px rgba(10, 10, 10, 0.1);
+  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+}
+input {
+  font-weight: 300;
+}
+p {
+  font-weight: 700;
+}
+p.subtitle {
+  padding-top: 1rem;
+}
+</style>
