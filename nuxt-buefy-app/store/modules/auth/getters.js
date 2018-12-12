@@ -1,9 +1,9 @@
 const getters = {
-  loggedUser: state => {
-    return state.logged_user
+  loggedIn: state => {
+    return state.loggedIn
   },
-  isAuthenticated: state => {
-    return !!state.logged_user
+  isloggedIn: state => {
+    return !!state.loggedIn
   }
 }
 

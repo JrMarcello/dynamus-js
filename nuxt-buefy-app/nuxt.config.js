@@ -13,13 +13,7 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: pkg.description }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-      // {
-      //   rel: 'stylesheet',
-      //   href: 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
-      // }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
   /*
@@ -44,7 +38,7 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
     // Doc: https://auth.nuxtjs.org/
-    // '@nuxtjs/auth',
+    '@nuxtjs/auth',
     // Doc: https://buefy.github.io/#/documentation
     'nuxt-buefy'
   ],
@@ -59,20 +53,19 @@ module.exports = {
     strategies: {
       local: {
         endpoints: {
-          login: { url: 'login', method: 'post', propertyName: 'token' },
-          user: { url: 'me', method: 'get', propertyName: 'data' },
-          logout: false
-        },
-        tokenRequired: true,
-        tokenType: 'Bearer'
+          login: {
+            url: '/api/auth/login',
+            method: 'post',
+            propertyName: 'token'
+          },
+          logout: { url: '/api/auth/logout', method: 'post' },
+          user: { url: '/api/auth/user', method: 'get' }
+        }
       }
-    },
-    redirect: {
-      login: '/home',
-      logout: '/',
-      user: '/me',
-      callback: '/'
     }
+  },
+  router: {
+    middleware: ['auth']
   },
   /*
   ** Build configuration

@@ -4,7 +4,7 @@
       <div class="container has-text-centered">
         <div class="column is-4 is-offset-4">
           <h3 class="title has-text-grey">Login</h3>
-          <p class="subtitle has-text-grey">Please login to proceed.</p>
+          <p class="subtitle has-text-grey">Faça login para continuar.</p>
           <div class="box">
             <figure class="avatar">
               <img src="https://placehold.it/128x128">
@@ -13,26 +13,33 @@
               <div class="field">
                 <div class="control">
                   <input
+                    v-model="credentials.email"
                     class="input is-large"
                     type="email"
                     placeholder="Your Email"
-                    autofocus="">
+                    autofocus=""
+                  >
                 </div>
               </div>
 
               <div class="field">
                 <div class="control">
                   <input
+                    v-model="credentials.password"
                     class="input is-large"
                     type="password"
-                    placeholder="Your Password">
+                    placeholder="Your Password"
+                  >
                 </div>
               </div>
               <div class="field">
                 <label class="checkbox">
                 <input type="checkbox">Remember me</label>
               </div>
-              <button class="button is-block is-info is-large is-fullwidth">Login</button>
+              <button
+                class="button is-block is-info is-large is-fullwidth"
+                @click="submit"
+              >Login</button>
             </form>
           </div>
           <!-- <p class="has-text-grey">
@@ -51,7 +58,29 @@ import BLogo from '@/components/Logo'
 
 export default {
   name: 'LoginPage',
-  layout: 'login'
+  layout: 'login',
+  auth: false,
+  data() {
+    return {
+      credentials: {
+        email: null,
+        password: null
+      }
+    }
+  },
+  methods: {
+    submit() {
+      this.$auth.loginWith('local', credentials)
+      // this.$store
+      //   .dispatch('auth/login', this.credentials)
+      //   .then(() => {
+      //     console.log('logged')
+      //   })
+      //   .catch(e => {
+      //     console.log(e)
+      //   })
+    }
+  }
 }
 </script>
 
