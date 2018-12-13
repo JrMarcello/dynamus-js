@@ -20,7 +20,7 @@
                     v-model="credentials.data.email"
                     class="input is-large"
                     type="email"
-                    placeholder="Your Email"
+                    placeholder="Email"
                     autofocus=""
                   >
                 </div>
@@ -32,7 +32,7 @@
                     v-model="credentials.data.password"
                     class="input is-large"
                     type="password"
-                    placeholder="Your Password"
+                    placeholder="Senha"
                   >
                 </div>
               </div>
@@ -86,13 +86,9 @@ export default {
   methods: {
     async login() {
       try {
-        console.log('credentials', this.credentials)
         await this.$auth.loginWith('local', this.credentials)
       } catch (e) {
-        console.log(e)
-        console.log(e.message)
-
-        this.error = e.response.data.message
+        this.error = e.message
       }
     }
   }

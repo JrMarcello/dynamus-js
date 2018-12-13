@@ -64,9 +64,9 @@ module.exports = {
       }
     }
   },
-  // router: {
-  //   middleware: ['auth']
-  // },
+  router: {
+    middleware: ['auth']
+  },
   /*
   ** Build configuration
   */
