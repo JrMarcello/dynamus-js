@@ -1,5 +1,5 @@
 const state = {
-  loggedIn: null
+  loggedInUser: null
 }
 
 export default state

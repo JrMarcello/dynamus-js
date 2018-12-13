@@ -7,6 +7,7 @@ import BLogo from '@/components/Logo'
 
 export default {
   name: 'HomePage',
+  middleware: 'auth',
   data() {
     return {}
   },

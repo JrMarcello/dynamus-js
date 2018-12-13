@@ -2,6 +2,10 @@
   <section class="hero is-success is-fullheight">
     <div class="hero-body">
       <div class="container has-text-centered">
+        <Notification
+          v-if="error"
+          :message="error"
+        />
         <div class="column is-4 is-offset-4">
           <h3 class="title has-text-grey">Login</h3>
           <p class="subtitle has-text-grey">Faça login para continuar.</p>
@@ -13,7 +17,7 @@
               <div class="field">
                 <div class="control">
                   <input
-                    v-model="credentials.email"
+                    v-model="credentials.data.email"
                     class="input is-large"
                     type="email"
                     placeholder="Your Email"
@@ -25,7 +29,7 @@
               <div class="field">
                 <div class="control">
                   <input
-                    v-model="credentials.password"
+                    v-model="credentials.data.password"
                     class="input is-large"
                     type="password"
                     placeholder="Your Password"
@@ -34,12 +38,19 @@
               </div>
               <div class="field">
                 <label class="checkbox">
-                <input type="checkbox">Remember me</label>
+                  <input
+                    v-model="credentials.data.rememberMe"
+                    type="checkbox"
+                  >
+                  Remember me
+                </label>
               </div>
               <button
                 class="button is-block is-info is-large is-fullwidth"
-                @click="submit"
-              >Login</button>
+                @click="login"
+              >
+                Login
+              </button>
             </form>
           </div>
           <!-- <p class="has-text-grey">
@@ -54,31 +65,35 @@
 </template>
 
 <script>
-import BLogo from '@/components/Logo'
+import Notification from '@/components/Notification'
 
 export default {
   name: 'LoginPage',
   layout: 'login',
   auth: false,
+  middleware: 'loggedIn',
   data() {
     return {
       credentials: {
-        email: null,
-        password: null
-      }
+        data: {
+          email: this.email,
+          password: this.password
+        }
+      },
+      error: null
     }
   },
   methods: {
-    submit() {
-      this.$auth.loginWith('local', credentials)
-      // this.$store
-      //   .dispatch('auth/login', this.credentials)
-      //   .then(() => {
-      //     console.log('logged')
-      //   })
-      //   .catch(e => {
-      //     console.log(e)
-      //   })
+    async login() {
+      try {
+        console.log('credentials', this.credentials)
+        await this.$auth.loginWith('local', this.credentials)
+      } catch (e) {
+        console.log(e)
+        console.log(e.message)
+
+        this.error = e.response.data.message
+      }
     }
   }
 }

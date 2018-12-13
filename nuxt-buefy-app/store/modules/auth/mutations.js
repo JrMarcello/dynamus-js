@@ -1,8 +1,8 @@
 import * as types from './mutation-types'
 
 const mutations = {
-  [types.SET_LOGGEDIN](state, user) {
-    state.loggedIn = user
+  [types.SET_LOGGEDIN_USER](state, user) {
+    state.loggedInUser = user
   }
 }
 
