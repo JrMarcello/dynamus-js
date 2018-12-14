@@ -2,10 +2,10 @@
   <section class="hero is-success is-fullheight">
     <div class="hero-body">
       <div class="container has-text-centered">
-        <Notification
+        <!-- <Notification
           v-if="error"
           :message="error"
-        />
+        /> -->
         <div class="column is-4 is-offset-4">
           <h3 class="title has-text-grey">Login</h3>
           <p class="subtitle has-text-grey">Faça login para continuar.</p>
@@ -65,13 +65,13 @@
 </template>
 
 <script>
-import Notification from '@/components/Notification'
+import Notification from '~/components/Notification'
 
 export default {
   name: 'LoginPage',
   layout: 'login',
   auth: false,
-  middleware: 'loggedIn',
+  // middleware: 'loggedIn',
   data() {
     return {
       credentials: {
@@ -83,10 +83,24 @@ export default {
       error: null
     }
   },
+  // head() {
+  //   return {
+  //     title: this.title,
+  //     meta: [
+  //       // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+  //       {
+  //         hid: 'description',
+  //         name: 'description',
+  //         content: 'My custom description'
+  //       }
+  //     ]
+  //   }
+  // },
   methods: {
     async login() {
       try {
-        await this.$auth.loginWith('local', this.credentials)
+        const v = await this.$auth.loginWith('local', this.credentials)
+        console.log(v)
       } catch (e) {
         this.error = e.message
       }

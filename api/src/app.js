@@ -17,7 +17,7 @@ configureParsers();
 setRoutes();
 initDB();
 
-function configureEnvironmentVariables() {
+function configureEnvironmentVariables () {
   const envConfig = dotenv.parse(fs.readFileSync(path.join(__dirname, '../env', `.env.${process.env.NODE_ENV}`)));
 
   Object.keys(envConfig).forEach((key) => {
@@ -27,7 +27,7 @@ function configureEnvironmentVariables() {
   });
 }
 
-function configureCORS() {
+function configureCORS () {
   app.use(cors());
   // app.use((req, res, next) => {
   //   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -37,7 +37,7 @@ function configureCORS() {
   // });
 }
 
-function configureParsers() {
+function configureParsers () {
   app.set('showStackError', true);
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
@@ -45,7 +45,7 @@ function configureParsers() {
   // app.use(express.static(`${config.rootDir}/public`));
 }
 
-function setRoutes() {
+function setRoutes () {
   app.get('/', (req, res) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/html');
@@ -57,7 +57,7 @@ function setRoutes() {
   });
 }
 
-function initDB() {
+function initDB () {
   require('./db');
 }
 
