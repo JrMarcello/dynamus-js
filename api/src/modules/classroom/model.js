@@ -19,7 +19,7 @@ export const getAll = (params => repository.getAll(params));
  * @param {Object} id - Classroom ID
  * @returns {Function} - Returns a Promisse
  */
-export const getOne = (id => repository.getOne(id));
+export const getById = (id => repository.getById(id));
 
 /**
  * @param {Object} classroom - Classroom data to be saved

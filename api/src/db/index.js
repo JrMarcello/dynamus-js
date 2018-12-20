@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 // import { consoleInfo, consoleError, consoleWarn } from '../common/utils';
+import seeder from './seeder';
 
 mongoose.Promise = global.Promise;
 
@@ -13,7 +14,7 @@ mongoose.connect(process.env.DB_URI, options)
   .then((con) => {
     // consoleInfo(`Mongoose connected to ${process.env.DB_URI}`);
     console.log(`Mongoose connected to ${process.env.DB_URI}`);
-    // console.log('conn', con);
+    seeder();
   })
   .catch((err) => {
     // consoleError(`Mongoose connection error: ${err}`);

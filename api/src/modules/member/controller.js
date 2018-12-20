@@ -21,11 +21,11 @@ export const getAll = async (request, response) => {
 * @param {Object} response - HTTP response
 * @returns {Object} HTTP response with status code and data
 */
-export const getOne = async (request, response) => {
-  // logInfo('[MEMBER] - [/GET] HTTP Request :: getOne method');
+export const getById = async (request, response) => {
+  // logInfo('[MEMBER] - [/GET] HTTP Request :: getById method');
 
   try {
-    response.json(await model.getOne(request.params.id));
+    response.json(await model.getById(request.params.id));
   } catch (error) {
     // Printar erro no log e/ou console
     response.status(500).json(error);

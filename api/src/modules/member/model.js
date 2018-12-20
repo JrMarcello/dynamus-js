@@ -19,7 +19,7 @@ export const getAll = (params => repository.getAll(params));
  * @param {Object} id - Member ID
  * @returns {Function} - Returns a Promisse
  */
-export const getOne = (id => repository.getOne(id));
+export const getById = (id => repository.getById(id));
 
 /**
  * @param {Object} member - Member data to be saved

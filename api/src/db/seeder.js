@@ -1,31 +1,26 @@
-const mongoose = require('mongoose');
-// const { port, db, secret }    = require('../config/env');
-// mongoose.Promise = require('bluebird');
-mongoose.connect(db);
+import * as User from '../modules/user/repository'
 
-// const User = require('../models/user');
-// const Event = require('../models/event');
+export default async () => {
+  await _feedUser();
+}
 
-// User.collection.drop();
-// Event.collection.drop();
+const _feedUser = async () => {
+  const users = await User.getAll();
 
-// User.create([{
-//   username: 'dan123',
-//   email: 'dan@dan.com',
-//   postcode: 'SE270JF',
-//   password: '123'
-// }, {
-//   username: 'ben123',
-//   email: 'ben@ben.com',
-//   postcode: 'SE191SB',
-//   password: '123'
-// }])
-// .then(user => {
-//   console.log(`${user.length} users created`);
-// })
-// .catch((err) => {
-//   console.log(err);
-// })
-// .finally(() => {
-//   mongoose.connection.close();
-// });
+  if (users.length === 0) {
+    User.create([{
+      name: { first: 'Admin' },
+      email: 'admin@mail.com',
+    }, {
+      name: { first: 'Pereira', last: 'Janson' },
+      email: 'pereira@mail.com',
+      password: '123'
+    }])
+    .then(user => {
+      console.log(`${user.length} users created`);
+    })
+    .catch((err) => {
+      console.log('USER-FEED-ERROR', err);
+    });
+  }
+};

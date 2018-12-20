@@ -6,7 +6,7 @@ import * as repository from './repository';
  * @param {Object} data - Class data to validate
  */
 const _validate = async (data) => {
-  if (!data || Object.keys(data).length === 0) throw new Error('Constante de validação dos campos de Class');
+  if (!data || Object.keys(data).length === 0) throw new Error('Constante de validação dos campos de User');
 };
 
 /**

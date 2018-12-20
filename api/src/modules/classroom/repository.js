@@ -16,7 +16,7 @@ export const getAll = (params) => {
  * @param {Interger} id - Classroom ID
  * @returns {Promisse} - Returns a Promisse
  */
-export const getOne = (id) => {
+export const getById = (id) => {
   return schema.findById(id);
 };
 
