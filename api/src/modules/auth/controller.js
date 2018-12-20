@@ -11,6 +11,6 @@ export const login = async (request, response) => {
   try {
     response.json(await model.login(request.body));
   } catch (e) {
-    response.status(500).json(e);
+    response.status(401).json(e);
   }
 };

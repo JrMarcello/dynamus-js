@@ -1,10 +1,6 @@
-/*
-  Module dependencies
- */
 import jwt from 'jsonwebtoken';
-// import crypto from 'crypto';
-// import { compare, encrypt } from '../../common/crypto';
-// import config from '../../../config/config';
+import { get as getUser } from '../user/model';
+import bcrypt from 'bcrypt';
 
 /**
  * @param {Object} data - User data to login
@@ -13,14 +9,9 @@ import jwt from 'jsonwebtoken';
  * @returns {Object} - JWT access token
  */
 export const login = async (data) => {
-  // bcrypt.compare(plainText, hashPassword)
-  console.log(data);
-  const user = {}; //GET USER BY EMAIL AND PASSWORD
-  user.id = 1;
-  // user.email = 'mail@mail.com';
-  // user.profile = 1;
+  const user = await getUser({ email: data.email });
 
-  if (!user) throw new Error('Email e/ou senha inválidos!')
+  if (user.length === 0 || !(await bcrypt.compare(data.password, user[0].password))) throw new Error('Email e/ou senha inválidos!')
 
   return _getJWTToken(user);
 };

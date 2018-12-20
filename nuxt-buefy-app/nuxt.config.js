@@ -59,7 +59,7 @@ module.exports = {
             propertyName: 'token'
           },
           logout: false,
-          user: { url: 'user', method: 'get' }
+          user: { url: 'user/:id', method: 'get' }
         }
       }
     }

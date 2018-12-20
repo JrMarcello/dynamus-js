@@ -5,11 +5,19 @@ import schema from './schema';
  * @returns {Promisse} - Returns a Promisse
  */
 export const getAll = async (params) => {
-  return schema.find({ active: true }).sort({ _id: -1 });
+  return schema.find({ active: true }).sort({ name: -1 });
 };
 
 /**
- * @param {Interger} id - Class ID
+ * @param {Interger} params - Params
+ * @returns {Promisse} - Returns a Promisse
+ */
+export const get = (params) => {
+  return schema.find(params).sort({ name: -1 });
+};
+
+/**
+ * @param {Interger} id - User ID
  * @returns {Promisse} - Returns a Promisse
  */
 export const getById = (id) => {
@@ -17,15 +25,7 @@ export const getById = (id) => {
 };
 
 /**
- * @param {Interger} id - Classroom ID
- * @returns {Promisse} - Returns a Promisse
- */
-export const getByClassroom = (id) => {
-  return schema.find({ classroom_id: id, active: true }).sort({ name: -1 });
-};
-
-/**
- * @param {Object} data - Class data to be saved
+ * @param {Object} data - User data to be saved
  * @returns {Promisse} - Returns a Promisse
  */
 export const create = (data) => {
@@ -33,7 +33,7 @@ export const create = (data) => {
 };
 
 /**
- * @param {Object} data - Class data to be updated
+ * @param {Object} data - User data to be updated
  * @returns {Promisse} - Returns a Promisse
  */
 export const update = (data) => {
@@ -41,7 +41,7 @@ export const update = (data) => {
 };
 
 /**
- * @param {Object} id - Class data to be removed
+ * @param {Object} id - User data to be removed
  * @param {Function} callback - First param: err, in case of error; Second param: records from DB
  * @returns {Function} - Returns the callback function
  */

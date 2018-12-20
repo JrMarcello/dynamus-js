@@ -6,6 +6,12 @@
           v-if="error"
           :message="error"
         /> -->
+        <div
+          v-if="error"
+          class="notification is-danger"
+        >
+          {{ error }}
+        </div>
         <div class="column is-4 is-offset-4">
           <h3 class="title has-text-grey">Login</h3>
           <p class="subtitle has-text-grey">Faça login para continuar.</p>
@@ -47,7 +53,7 @@
               </div>
               <button
                 class="button is-block is-info is-large is-fullwidth"
-                @click="login"
+                @click.prevent="login()"
               >
                 Login
               </button>
@@ -65,13 +71,13 @@
 </template>
 
 <script>
-import Notification from '~/components/Notification'
+import Notification from '@/components/Notification'
 
 export default {
   name: 'LoginPage',
   layout: 'login',
   auth: false,
-  // middleware: 'loggedIn',
+  middleware: 'loggedIn',
   data() {
     return {
       credentials: {
@@ -99,9 +105,9 @@ export default {
   methods: {
     async login() {
       try {
-        const v = await this.$auth.loginWith('local', this.credentials)
-        console.log(v)
+        await this.$auth.loginWith('local', this.credentials)
       } catch (e) {
+        console.log('EROU', e)
         this.error = e.message
       }
     }
