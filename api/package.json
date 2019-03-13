@@ -30,5 +30,8 @@
     "jsonwebtoken": "^8.4.0",
     "moment": "^2.23.0",
     "mongoose": "^5.4.0"
+  },
+  "engines": {
+    "node": "10.x"
   }
 }
